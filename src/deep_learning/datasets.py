@@ -87,8 +87,8 @@ class SegmentationDataset2DSlices(Dataset):
         # tensor_image = torch.from_numpy(np.expand_dims(np_image, axis=0))
 
         if self.binarize_mask:
-            tensor_target = np.expand_dims(tensor_target, axis=0)
             tensor_target = (tensor_target > 0).int()
+            tensor_target = np.expand_dims(tensor_target, axis=0)
         else:
             logging.debug(f"tensor_target values are {torch.unique(tensor_target)}")
             # clipping the values to be in range [0, num_classes-1], since the target mask has classes 0, 1, 2, 4 (3 is skipped) TODO: investigate why it is so
